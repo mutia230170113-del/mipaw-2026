@@ -45,6 +45,11 @@ Route::get('/', function () {
 
 Route::middleware('auth')->get('/dashboard', function () {
 
+    // PAKSA BYPASS BERDASARKAN EMAIL ADMIN ANDA
+    if (auth()->user()->email == 'admin@mipaw.com') {
+        return redirect()->route('admin.dashboard');
+    }
+
     if (auth()->user()->role == 'admin') {
         return redirect()->route('admin.dashboard');
     }
